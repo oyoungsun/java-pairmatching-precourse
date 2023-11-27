@@ -1,6 +1,9 @@
 package pairmatching.view;
 
+import pairmatching.controller.PairDto;
+
 public class OutputView {
+    private static final String PAIR_JOIN = " : ";
 
     public static void printExceptionMessage(final String error) {
         System.out.println(error);
@@ -9,6 +12,7 @@ public class OutputView {
     public static void printRequestPairInformation() {
         System.out.println(OutMessage.PAIR_MATCHING.getPrint());
     }
+
     public static void printPairSettingList() {
         printEmpty();
         System.out.println(OutMessage.PAIR_INFOMATION.getPrint());
@@ -32,8 +36,17 @@ public class OutputView {
         System.out.println(OutMessage.RESET_COMPLIETE.getPrint());
     }
 
-    private enum OutMessage{
+    public static void printPairResult(final PairDto pairDto) {
+        printEmpty();
+        System.out.println(OutMessage.MATCHING_RESULT.getPrint());
+        pairDto.getPairs().forEach(
+            pair -> System.out.println(String.join(PAIR_JOIN, pair)
+            ));
+    }
+
+    private enum OutMessage {
         //TODO : 레벨%d : %s, 레벨List.joining( | ) 로 변환
+        MATCHING_RESULT("페어 매칭 결과입니다."),
         RESET_COMPLIETE("초기화 되었습니다. "),
         REMATCHING("매칭 정보가 있습니다. 다시 매칭하시겠습니까?"),
         FEATURE("기능을 선택하세요.\n"
@@ -54,9 +67,11 @@ public class OutputView {
                 + "ex) 백엔드, 레벨1, 자동차경주");
 
         private final String print;
+
         private OutMessage(final String print) {
             this.print = print;
         }
+
         private String getPrint() {
             return print;
         }

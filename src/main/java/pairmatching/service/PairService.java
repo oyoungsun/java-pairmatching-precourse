@@ -5,6 +5,7 @@ import static camp.nextstep.edu.missionutils.Randoms.shuffle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import pairmatching.controller.PairDto;
 import pairmatching.domain.Course;
 import pairmatching.domain.CrewRepository;
 import pairmatching.domain.PairInformation;
@@ -43,7 +44,6 @@ public class PairService {
         if (shuffled.size() % MATCHING_PEOPLE != 0) {
             result.get(result.size() - 1).add(shuffled.get(shuffled.size() - 1));
         }
-        System.out.println(result.toString());
         matched.put(pairInformation, result);
     }
 
@@ -51,9 +51,14 @@ public class PairService {
     }
 
     public void reset() {
+        matched = new HashMap<>();
     }
 
     public boolean isExistPair(final PairInformation pairInformation) {
         return matched.containsKey(pairInformation);
+    }
+
+    public PairDto getPairResult(final PairInformation pairInformation) {
+        return PairDto.fromEntity(matched.get(pairInformation));
     }
 }

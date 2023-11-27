@@ -33,8 +33,7 @@ public class FeatureController {
 
     private void doFeature(final Feature feature) {
         if (feature.isMatching()) {
-            OutputView.printPairSettingList();
-            doMatching();
+            matching();
             return;
         }
         if (feature.isAsk()) {
@@ -45,14 +44,22 @@ public class FeatureController {
         OutputView.printReset();
     }
 
-    private void doMatching() {
+    private void matching() {
+        OutputView.printPairSettingList();
+        PairInformation pairInformation = doMatching();
+        PairDto pairDto = pairService.getPairResult(pairInformation);
+        OutputView.printPairResult(pairDto);
+    }
+
+    private PairInformation doMatching() {
         OutputView.printRequestPairInformation();
         PairInformation pairInformation = ExceptionHandler.setting(() -> settingPairInformation());
         if (pairService.isExistPair(pairInformation)) {
             ExceptionHandler.process(() -> matchingAgain(pairInformation));
-            return;
+            return pairInformation;
         }
         pairService.matching(pairInformation);
+        return pairInformation;
     }
 
     private void matchingAgain(final PairInformation pairInformation) {
