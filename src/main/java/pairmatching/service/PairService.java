@@ -19,6 +19,7 @@ public class PairService {
     private static final int MATCHING_PEOPLE = 2;
     private static final int MAX_DEPTH = 3;
     private static int MINIMUM_MATCHING_SIZE = 2;
+    private static String MATCHING_EXCEPTION = "매칭이 불가능합니다.";
     private final CrewRepository crewRepository;
     private HashMap<PairInformation, List<Set<String>>> matched = new HashMap<>();
     private HashMap<Level, List<Set<String>>> dupplicated = new HashMap<>();
@@ -43,9 +44,9 @@ public class PairService {
     private void matchingCrew(final PairInformation pairInformation, final List<String> crew) {
         List<Set<String>> result;
         int depth=0;
-        if(crew.size() < MINIMUM_MATCHING_SIZE) throw new IllegalArgumentException("매칭이 불가능합니다.");
+        if(crew.size() < MINIMUM_MATCHING_SIZE) throw new IllegalArgumentException(MATCHING_EXCEPTION);
         do {
-            if(depth == MAX_DEPTH) throw new IllegalArgumentException("매칭이 불가능합니다.");
+            if(depth == MAX_DEPTH) throw new IllegalArgumentException(MATCHING_EXCEPTION);
             List<String> shuffled = shuffle(crew);
             result = shuffledPair(shuffled);
         }while(isPairDupplicated(pairInformation.getLevel(), result));
