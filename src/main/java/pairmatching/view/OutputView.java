@@ -28,6 +28,7 @@ public class OutputView {
     }
 
     public static void printRequestReMatching() {
+        printEmpty();
         System.out.println(OutMessage.REMATCHING.getPrint());
     }
 

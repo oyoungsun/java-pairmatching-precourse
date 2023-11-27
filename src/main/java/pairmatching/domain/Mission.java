@@ -31,5 +31,7 @@ public enum Mission {
         return this.name;
     }
 
-
+    public Level getLevel() {
+        return level;
+    }
 }

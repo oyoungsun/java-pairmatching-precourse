@@ -74,12 +74,12 @@ public class FeatureController {
     private void matchingAgain(final PairInformation pairInformation) {
         OutputView.printRequestReMatching();
         String input = inputView.reqeustReMatching();
-        OutputView.printEmpty();
         if (Rematching.isYes(input)) {
             pairService.matching(pairInformation);
             return;
         }
         if (Rematching.isNo(input)) {
+            OutputView.printEmpty();
             doMatching();
         }
         throw new IllegalArgumentException("네 또는 아니오 중에서 입력해주세요.");

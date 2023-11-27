@@ -11,9 +11,11 @@ public class PairInformation {
 
     private final Mission mission;
     private final Course course;
+    private final Level level;
 
     public PairInformation(final String course, final String level, final String mission) {
         this.mission = Mission.findByString(mission, level);
+        this.level = this.mission.getLevel();
         this.course = Course.findByString(course);
     }
 
@@ -22,15 +24,22 @@ public class PairInformation {
             throw new IllegalArgumentException(NOT_PAIR_PATTERN);
         }
         String[] splited = input.split(",");
-        if(splited.length != 3) throw new IllegalArgumentException(NOT_PAIR_PATTERN);
+        if (splited.length != 3) {
+            throw new IllegalArgumentException(NOT_PAIR_PATTERN);
+        }
         return new PairInformation(splited[0].trim(), splited[1].trim(), splited[2].trim());
     }
 
     public Course getCourse() {
         return course;
     }
+
     public Mission getMission() {
         return mission;
+    }
+
+    public Level getLevel() {
+        return level;
     }
 
     @Override
