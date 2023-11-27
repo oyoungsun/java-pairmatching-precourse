@@ -25,6 +25,11 @@ public class InputView implements Input {
         return readString();
     }
 
+    @Override
+    public String reqeustReMatching() {
+        return readString();
+    }
+
     private String readString() {
         return Console.readLine();
     }

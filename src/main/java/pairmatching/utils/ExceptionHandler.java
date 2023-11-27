@@ -1,5 +1,6 @@
 package pairmatching.utils;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import pairmatching.view.OutputView;
 
@@ -18,13 +19,21 @@ public class ExceptionHandler {
             return input(supplier, depth + 1);
         }
     }
-
-    public static <T> T process(Supplier<T> supplier) {
+    public static <T> T setting(Supplier<T> supplier) {
         try {
             return supplier.get();
         } catch (IllegalArgumentException e) {
             printExceptionMessage(e);
-            return process(supplier);
+            return setting(supplier);
+        }
+    }
+
+    public static <T> void process(Runnable runnable) {
+        try {
+            runnable.run();
+        } catch (IllegalArgumentException e) {
+            printExceptionMessage(e);
+            process(runnable);
         }
     }
 

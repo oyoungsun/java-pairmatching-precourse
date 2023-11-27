@@ -4,4 +4,6 @@ public interface Input {
     String reqeustFeature();
 
     String reqeustPairInformation();
+
+    String reqeustReMatching();
 }
