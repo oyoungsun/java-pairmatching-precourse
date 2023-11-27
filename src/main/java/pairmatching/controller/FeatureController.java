@@ -1,9 +1,11 @@
 package pairmatching.controller;
 
 import pairmatching.domain.Feature;
+import pairmatching.domain.PairInformation;
 import pairmatching.service.PairService;
 import pairmatching.utils.ExceptionHandler;
 import pairmatching.view.Input;
+import pairmatching.view.OutputView;
 
 public class FeatureController {
     private final Input inputView;
@@ -28,7 +30,8 @@ public class FeatureController {
 
     private void doFeature(final Feature feature) {
         if(feature.isMatching()){
-            pairService.matching();
+            PairInformation pairInformation = settingPairInformation();
+            pairService.matching(pairInformation);
             return;
         }
         if(feature.isAsk()){
@@ -38,7 +41,14 @@ public class FeatureController {
         pairService.reset();
     }
 
+    private PairInformation settingPairInformation() {
+        OutputView.printRequestPairSettingList();
+        String input = ExceptionHandler.input(inputView::reqeustPairInformation, 0);
+        return PairInformation.from(input);
+    }
+
     private Feature settingFeature() {
+        OutputView.printRequestFeature();
         String input = ExceptionHandler.input(inputView::reqeustFeature, 0);
         return Feature.findFeatureByString(input);
     }

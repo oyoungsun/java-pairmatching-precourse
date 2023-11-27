@@ -11,8 +11,17 @@ public class InputView implements Input {
     private static final String ONLY_NUMBER = "숫자만 입력해주세요 ";
     private static final String INTEGER_BOUNDARY = "정수의 범위를 벗어났습니다. ";
 
+    public static Input getInstance() {
+        return new ProxyInputView(inputView);
+    }
+
     @Override
     public String reqeustFeature() {
+        return readString();
+    }
+
+    @Override
+    public String reqeustPairInformation() {
         return readString();
     }
 

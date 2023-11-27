@@ -13,4 +13,9 @@ public class ProxyInputView implements Input {
     public String reqeustFeature() {
         return ExceptionHandler.input(viewable::reqeustFeature, 0);
     }
+
+    @Override
+    public String reqeustPairInformation() {
+        return ExceptionHandler.input(viewable::reqeustPairInformation, 0);
+    }
 }
