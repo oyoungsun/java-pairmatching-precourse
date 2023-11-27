@@ -47,7 +47,11 @@ public class PairService {
         matched.put(pairInformation, result);
     }
 
-    public void ask() {
+    public PairDto ask(final PairInformation pairInformation) {
+        if (isExistPair(pairInformation)) {
+            return getPairResult(pairInformation);
+        }
+        return null;
     }
 
     public void reset() {

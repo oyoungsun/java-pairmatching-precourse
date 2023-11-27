@@ -27,7 +27,7 @@ public class FeatureController {
             if (feature.isExit()) {
                 break;
             }
-            doFeature(feature);
+            ExceptionHandler.process(() -> doFeature(feature));
         }
     }
 
@@ -37,22 +37,31 @@ public class FeatureController {
             return;
         }
         if (feature.isAsk()) {
-            pairService.ask();
+            OutputView.printPairInformationList();
+            ExceptionHandler.process(() -> ask());
             return;
         }
         pairService.reset();
         OutputView.printReset();
     }
 
+    private void ask() {
+        PairInformation pairInformation = ExceptionHandler.setting(() -> settingPairInformation());
+        PairDto pairDto = pairService.ask(pairInformation);
+        if(pairDto == null){
+            throw new IllegalArgumentException("매칭 이력이 없습니다.");
+        }
+        OutputView.printPairResult(pairDto);
+    }
+
     private void matching() {
-        OutputView.printPairSettingList();
+        OutputView.printPairInformationList();
         PairInformation pairInformation = doMatching();
         PairDto pairDto = pairService.getPairResult(pairInformation);
         OutputView.printPairResult(pairDto);
     }
 
     private PairInformation doMatching() {
-        OutputView.printRequestPairInformation();
         PairInformation pairInformation = ExceptionHandler.setting(() -> settingPairInformation());
         if (pairService.isExistPair(pairInformation)) {
             ExceptionHandler.process(() -> matchingAgain(pairInformation));
@@ -77,7 +86,7 @@ public class FeatureController {
     }
 
     private PairInformation settingPairInformation() {
-
+        OutputView.printRequestPairInformation();
         String input = ExceptionHandler.input(inputView::reqeustPairInformation, 0);
         return PairInformation.from(input);
     }

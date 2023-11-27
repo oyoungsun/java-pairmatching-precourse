@@ -13,7 +13,7 @@ public class OutputView {
         System.out.println(OutMessage.PAIR_MATCHING.getPrint());
     }
 
-    public static void printPairSettingList() {
+    public static void printPairInformationList() {
         printEmpty();
         System.out.println(OutMessage.PAIR_INFOMATION.getPrint());
     }
