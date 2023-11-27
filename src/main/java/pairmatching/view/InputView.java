@@ -8,7 +8,8 @@ import java.util.regex.Pattern;
 public class InputView implements Input {
     private static final InputView inputView = new InputView();
     private static final Pattern NUMBER = Pattern.compile("^[0-9]*$");
-    private static final String ONLY_NUMBER = "숫자만 입력해주세요 ";
+    private static final String ONLY_NUMBER = "숫자만 입력해주세요";
+    private static final String NULL_INPUT = "입력이 비어있습니다.";
     private static final String INTEGER_BOUNDARY = "정수의 범위를 벗어났습니다. ";
 
     public static Input getInstance() {
@@ -31,7 +32,9 @@ public class InputView implements Input {
     }
 
     private String readString() {
-        return Console.readLine();
+        String input = Console.readLine();
+        if(input.isEmpty() || input.trim().length()==0) throw new IllegalArgumentException(NULL_INPUT);
+        return input;
     }
 
     private int readInt(){
