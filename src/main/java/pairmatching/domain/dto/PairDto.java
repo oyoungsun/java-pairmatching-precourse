@@ -1,4 +1,4 @@
-package pairmatching.controller;
+package pairmatching.domain.dto;
 
 import java.util.Collections;
 import java.util.List;

@@ -3,12 +3,11 @@ package pairmatching.service;
 import static camp.nextstep.edu.missionutils.Randoms.shuffle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import pairmatching.controller.PairDto;
+import pairmatching.domain.dto.PairDto;
 import pairmatching.domain.Course;
 import pairmatching.domain.CrewRepository;
 import pairmatching.domain.Level;

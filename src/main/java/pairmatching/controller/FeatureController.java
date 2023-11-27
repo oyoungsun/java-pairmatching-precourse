@@ -1,6 +1,7 @@
 package pairmatching.controller;
 
 import pairmatching.domain.Feature;
+import pairmatching.domain.dto.PairDto;
 import pairmatching.domain.PairInformation;
 import pairmatching.domain.Rematching;
 import pairmatching.service.PairService;

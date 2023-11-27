@@ -1,6 +1,6 @@
 package pairmatching.view;
 
-import pairmatching.controller.PairDto;
+import pairmatching.domain.dto.PairDto;
 
 public class OutputView {
     private static final String PAIR_JOIN = " : ";
